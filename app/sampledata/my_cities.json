@@ -1,0 +1,11 @@
+{
+  "my_cities" :[
+    {"name": "Adrar", "country" : "Algeria"},
+    {"name": "Ilizi", "country" : "Algeria"},
+    {"name": "Sfax", "country" : "Tunisia"},
+    {"name": "London", "country" : "UK"},
+    {"name": "New York", "country" : "USA"},
+    {"name": "Tokyo", "country" : "Japan"},
+    {"name": "Rio", "country" : "Brazil"}
+  ]
+}
