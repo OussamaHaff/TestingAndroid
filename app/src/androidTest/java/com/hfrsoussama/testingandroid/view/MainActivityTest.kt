@@ -1,14 +1,10 @@
 package com.hfrsoussama.testingandroid.view
 
 import android.view.View
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
-import com.hfrsoussama.testingandroid.R
+import org.hamcrest.Matcher
 import org.junit.Rule
 import org.junit.Test
-import java.util.regex.Matcher
-import java.util.regex.Pattern.matches
 
 class MainActivityTest {
 
@@ -18,17 +14,16 @@ class MainActivityTest {
 
     @Test
     fun countDisplayedCities() {
-        onView(
-            withId(R.id.citiesRecyclerView)
-        ).check(
-            matches(hasItemCount(10))
-        )
+
     }
 
-    class CustomMatchers {
-        companion object {
-            fun withItemCount(count: Int): Matcher<View> {
-            }
+
+    class RecyclerViewMatcher(private val recyclerViewId: Int) {
+
+        fun atPosition(position: Int) = atPositionOnView(position, -1)
+
+        private fun atPositionOnView(position: Int, i: Int): Matcher<View> {
+
         }
     }
 }
