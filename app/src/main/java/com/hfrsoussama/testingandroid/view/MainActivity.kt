@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
 
-    private val observer = Observer<List<City>> {newCitiesList ->
-        render(newCitiesList)
-    }
+    private val observer = Observer<List<City>> { render(it) }
 
     private fun render(citiesList: List<City>) {
         citiesRecyclerView.swapAdapter(CitiesAdapter(citiesList), false)
@@ -38,7 +36,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btnSearch.setOnClickListener(this)
     }
-
 
     override fun onClick(v: View?) {
         when (v) {

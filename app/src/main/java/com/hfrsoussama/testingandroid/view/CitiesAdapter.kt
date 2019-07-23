@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.item_city.view.*
 
 class CitiesAdapter(private val citiesData: List<City>) : RecyclerView.Adapter<CitiesAdapter.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.item_city, parent, false)
         return ViewHolder(inflatedView)
@@ -18,11 +17,9 @@ class CitiesAdapter(private val citiesData: List<City>) : RecyclerView.Adapter<C
 
     override fun getItemCount() = citiesData.size
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindCity(citiesData[position])
     }
-
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bindCity(city: City) {
@@ -32,5 +29,4 @@ class CitiesAdapter(private val citiesData: List<City>) : RecyclerView.Adapter<C
             }
         }
     }
-
 }
