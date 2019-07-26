@@ -14,16 +14,13 @@ class MainActivityTest {
 
     @Test
     fun countDisplayedCities() {
-
     }
-
 
     class RecyclerViewMatcher(private val recyclerViewId: Int) {
 
         fun atPosition(position: Int) = atPositionOnView(position, -1)
 
         private fun atPositionOnView(position: Int, i: Int): Matcher<View> {
-
         }
     }
 }
