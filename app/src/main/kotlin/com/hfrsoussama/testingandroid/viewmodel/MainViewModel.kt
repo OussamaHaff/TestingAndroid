@@ -13,6 +13,15 @@ class MainViewModel : ViewModel() {
         citiesList.value = CitiesListFactory.getListOfCities()
     }
 
+    /**
+     * 
+     *
+     * Resolves :
+     * - RG-
+     * - RG-
+     *
+     * @see <a href="">RG-</a>
+     */
     fun searchForCityWith(string: String) {
         citiesList.value = CitiesListFactory.getListOfCities()
             .filter { it.name.contains(string, ignoreCase = true) || it.country.contains(string, ignoreCase = true) }

@@ -1,5 +1,5 @@
 plugins {
-    id "org.jlleitschuh.gradle.ktlint" version "8.2.0"
+    id 'io.gitlab.arturbosch.detekt' version '1.0.0-RC16'
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
@@ -24,21 +24,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main { java.srcDirs = ['src/main/kotlin'] }
+    }
 }
 
-import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+detekt {
+    toolVersion '1.0.0-RC16'
+    input = files("src/main/kotlin")
+    filters = ".*/resources/.*,.*/build/.*"
 
-ktlint {
-    version = "0.22.0"
-    debug = false
-    verbose = true
-    android = true
-    outputToConsole = true
-    reporters = [ReporterType.PLAIN, ReporterType.CHECKSTYLE]
-    ignoreFailures = true
-    filter {
-        exclude("**/generated/**")
-        include("**/kotlin/**")
+    reports {
+        html {
+            enabled = true
+            destination = file("report.html")
+        }
     }
 }
 
