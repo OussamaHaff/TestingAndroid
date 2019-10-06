@@ -1,30 +1,26 @@
 package com.hfrsoussama.testingandroid.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hfrsoussama.testingandroid.model.CitiesListFactory
 import com.hfrsoussama.testingandroid.model.City
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val cities: List<City>) : ViewModel() {
 
-    val citiesList  by lazy { MutableLiveData<List<City>>() }
+    private val _citiesList = MutableLiveData<List<City>>()
+    val citiesList: LiveData<List<City>>
+        get() = _citiesList
+
 
     init {
-        citiesList.value = CitiesListFactory.getListOfCities()
+        _citiesList.value = cities
     }
 
-    /**
-     * 
-     *
-     * Resolves :
-     * - RG-
-     * - RG-
-     *
-     * @see <a href="">RG-</a>
-     */
     fun searchForCityWith(string: String) {
-        citiesList.value = CitiesListFactory.getListOfCities()
-            .filter { it.name.contains(string, ignoreCase = true) || it.country.contains(string, ignoreCase = true) }
+        _citiesList.value = cities.filter {
+            it.name.contains(string, ignoreCase = true)
+                    || it.country.contains(string, ignoreCase = true)
+        }
     }
 
 }

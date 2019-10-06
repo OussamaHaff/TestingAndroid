@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hfrsoussama.testingandroid.R
 import com.hfrsoussama.testingandroid.model.City
 import com.hfrsoussama.testingandroid.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val viewModel by lazy {
-        ViewModelProviders.of(this).get(MainViewModel::class.java)
-    }
+    private val mainViewModel: MainViewModel by viewModel()
 
     private val observer = Observer<List<City>> { render(it) }
 
@@ -29,17 +27,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         citiesRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = CitiesAdapter(viewModel.citiesList.value.orEmpty())
+            adapter = CitiesAdapter(mainViewModel.citiesList.value.orEmpty())
         }
 
-        viewModel.citiesList.observe(this, observer)
+        mainViewModel.citiesList.observe(this, observer)
 
         btnSearch.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            btnSearch -> viewModel.searchForCityWith(etSearchInput.text.toString())
+            btnSearch -> mainViewModel.searchForCityWith(etSearchInput.text.toString())
         }
     }
 }
