@@ -4,6 +4,7 @@
         package="com.hfrsoussama.testingandroid">
 
     <application
+
             android:allowBackup="false"
             android:name=".TestingAndroidApp"
             android:icon="@mipmap/ic_launcher"
@@ -19,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <uses-library android:name="android.test.runner"
+                android:required="false" />
     </application>
 
 </manifest>

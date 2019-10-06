@@ -1,26 +1,44 @@
 package com.hfrsoussama.testingandroid.view
 
-import android.view.View
-import androidx.test.rule.ActivityTestRule
-import org.hamcrest.Matcher
+import androidx.lifecycle.Lifecycle
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.hfrsoussama.testingandroid.R
+import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
-    @Rule
-    @JvmField
-    var activityRule = ActivityTestRule(MainActivity::class.java)
+    @get:Rule
+    val activityScenarioRule = activityScenarioRule<MainActivity>()
+
 
     @Test
-    fun countDisplayedCities() {
+    fun testMainScreenCreation() {
+        val scenario = activityScenarioRule.scenario
+
+        Assert.assertEquals(Lifecycle.State.RESUMED, scenario.state)
+
     }
 
-    class RecyclerViewMatcher(private val recyclerViewId: Int) {
+    @Test
+    fun `testSearch`() {
+        val scenario = activityScenarioRule.scenario
 
-        fun atPosition(position: Int) = atPositionOnView(position, -1)
+        onView(ViewMatchers.withId(R.id.etSearchInput)).perform(ViewActions.typeText("ad"))
+        onView(ViewMatchers.withId(R.id.btnSearch)).perform(ViewActions.click())
 
-        private fun atPositionOnView(position: Int, i: Int): Matcher<View> {
-        }
+        onView(ViewMatchers.withId(R.id.citiesRecyclerView))
+            .perform(actionOnItemAtPosition<CitiesAdapter.ViewHolder>(0, ViewActions.longClick()))
+
+        // TODO add missing assert
     }
+
 }
