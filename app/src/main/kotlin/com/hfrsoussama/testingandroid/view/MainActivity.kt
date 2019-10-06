@@ -27,10 +27,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         citiesRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = CitiesAdapter(mainViewModel.citiesList.value.orEmpty())
+            adapter = CitiesAdapter(mainViewModel.citiesFilteredList.value.orEmpty())
         }
 
-        mainViewModel.citiesList.observe(this, observer)
+        mainViewModel.citiesFilteredList.observe(this, observer)
 
         btnSearch.setOnClickListener(this)
     }

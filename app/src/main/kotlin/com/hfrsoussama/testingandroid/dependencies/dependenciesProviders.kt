@@ -10,5 +10,7 @@ val repoModule = module {
 }
 
 val viewModelsModule = module {
-    viewModel { MainViewModel(cities = get()) }
+    viewModel { MainViewModel(allCities = get()) }
 }
+
+val appModules = listOf(repoModule, viewModelsModule)

@@ -5,19 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hfrsoussama.testingandroid.model.City
 
-class MainViewModel(private val cities: List<City>) : ViewModel() {
+class MainViewModel(private val allCities: List<City>) : ViewModel() {
 
-    private val _citiesList = MutableLiveData<List<City>>()
-    val citiesList: LiveData<List<City>>
-        get() = _citiesList
+    private val _filteredListOfCities = MutableLiveData<List<City>>()
+    val citiesFilteredList: LiveData<List<City>>
+        get() = _filteredListOfCities
 
 
     init {
-        _citiesList.value = cities
+        _filteredListOfCities.value = allCities
     }
 
     fun searchForCityWith(string: String) {
-        _citiesList.value = cities.filter {
+        _filteredListOfCities.value = allCities.filter {
             it.name.contains(string, ignoreCase = true)
                     || it.country.contains(string, ignoreCase = true)
         }
